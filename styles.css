@@ -39,24 +39,27 @@ body {
 
 .display {
     display: flex;
-    justify-content: space-evenly;
     flex-flow: column wrap;
-    align-content: flex-end;
     font-size: xx-large;
     border: 2px solid black;
     flex: 1;
-    margin-bottom: 10px;
 }
 
 .output {
     flex: 1;
     color: gray;
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 95%;
     margin-top: 10px;
     margin-right: 10px;
 }
 
 .input {
     flex: 1;
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 95%;
     margin-right: 10px;
 }
 
@@ -79,4 +82,10 @@ button {
     font-size: x-large;
     margin: 3px;
     background-color: rgb(244, 244, 244);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
