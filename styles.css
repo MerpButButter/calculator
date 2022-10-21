@@ -73,6 +73,7 @@ body {
 
 .equal {
     background-color: rgb(127, 210, 255);
+    grid-column: span 3;
 }
 
 .gray {

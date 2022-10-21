@@ -35,11 +35,46 @@ setupEventKey(plus, "+", () => {
         output.textContent += " +";
     }
 });
+//* MINUS
+setupEventKey(minus, "-", () => {
+    if (inOperation) {
+        operate();
+    } else {
+        enterEquation();
+        inOperation = true;
+        lastNum = Number(output.textContent);
+        output.textContent += " -";
+    }
+});
+
+//* MULTIPLY
+setupEventKey(multiply, "*", () => {
+    if (inOperation) {
+        operate();
+    } else {
+        enterEquation();
+        inOperation = true;
+        lastNum = Number(output.textContent);
+        output.textContent += " *";
+    }
+});
+
+//* MULTIPLY
+setupEventKey(divide, "/", () => {
+    if (inOperation) {
+        operate();
+    } else {
+        enterEquation();
+        inOperation = true;
+        lastNum = Number(output.textContent);
+        output.textContent += " /";
+    }
+});
 
 //* PLUS MINUS
 setupEventKey(plus_minus, "`", () => {
-    if (output.textContent === "") return;
-    output.textContent = -Number(output.textContent);
+    if (input.textContent === "") return;
+    input.textContent = -Number(input.textContent);
 });
 
 //* CLEAR_ALL
@@ -116,11 +151,26 @@ function keyTemp(...args) {
 function operate() {
     currentNum = Number(input.textContent);
     if (/[+]/.test(output.textContent)) {
-        console.log(lastNum, currentNum);
-        console.info("ADDING");
+        console.info("PLUS`");
         output.textContent = output.textContent + " " + currentNum + " =";
         input.textContent = (lastNum + currentNum);
         calculated = true;
+    } else if (/[-]/.test(output.textContent)) {
+        console.info("MINUS");
+        output.textContent = output.textContent + " " + currentNum + " =";
+        input.textContent = (lastNum - currentNum);
+        calculated = true;
+    } else if (/[*]/.test(output.textContent)) {
+        console.info("MULTIPLY");
+        output.textContent = output.textContent + " " + currentNum + " =";
+        input.textContent = (lastNum * currentNum);
+        calculated = true;
+    } else if (/[/]/.test(output.textContent)) {
+        console.info("DIVIDE");
+        output.textContent = output.textContent + " " + currentNum + " =";
+        input.textContent = (lastNum / currentNum).toPrecision(3);
+        calculated = true;
     }
+
     inOperation = false;
 }
