@@ -48,6 +48,7 @@ body {
 .output {
     flex: 1;
     color: gray;
+    font-size: x-large;
     word-wrap: break-word;
     word-break: break-all;
     width: 95%;
