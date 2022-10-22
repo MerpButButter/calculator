@@ -10,6 +10,7 @@ let plus = document.querySelector(".plus");
 let minus = document.querySelector(".minus");
 let multiply = document.querySelector(".multiply");
 let divide = document.querySelector(".divide");
+let deci = document.querySelector(".deci");
 
 let lastNum = 0;
 let currentNum = 0;
@@ -24,6 +25,16 @@ numbers.forEach((num) => {
     num.addEventListener("click", setUpDigits);
 });
 
+//* DECIMAL
+setupEventKey(deci, ".", () => {
+    console.log("DECI");
+    let itc = Number(input.textContent);
+    console.log(itc, String(itc), String(Math.floor(itc)));
+    if (String(input.textContent) === String(Math.floor(input.textContent))) {
+        isCalc();
+        input.textContent += ".";
+    }
+});
 //* PLUS
 setupEventKey(plus, "+", () => {
     if (inOperation) {
@@ -59,7 +70,7 @@ setupEventKey(multiply, "*", () => {
     }
 });
 
-//* MULTIPLY
+//* DIVIDE
 setupEventKey(divide, "/", () => {
     if (inOperation) {
         operate();
@@ -81,6 +92,11 @@ setupEventKey(plus_minus, "`", () => {
 setupEventKey(clearAll, "Delete", () => {
     input.textContent = "0";
     output.textContent = "";
+    lastNum = 0;
+    currentNum = 0;
+    inOperation = false;
+    calculated = false;
+    canEnter = false;
 });
 // * CLEAR 
 setupEventKey(clear, "Backspace", () => input.textContent = input.textContent.substring(0, (input.textContent.length - 1)) || 0, "keydown");
@@ -155,11 +171,6 @@ function operate() {
         output.textContent = output.textContent + " " + currentNum + " =";
         input.textContent = (lastNum + currentNum);
         calculated = true;
-    } else if (/[-]/.test(output.textContent)) {
-        console.info("MINUS");
-        output.textContent = output.textContent + " " + currentNum + " =";
-        input.textContent = (lastNum - currentNum);
-        calculated = true;
     } else if (/[*]/.test(output.textContent)) {
         console.info("MULTIPLY");
         output.textContent = output.textContent + " " + currentNum + " =";
@@ -168,7 +179,12 @@ function operate() {
     } else if (/[/]/.test(output.textContent)) {
         console.info("DIVIDE");
         output.textContent = output.textContent + " " + currentNum + " =";
-        input.textContent = (lastNum / currentNum).toPrecision(3);
+        input.textContent = (lastNum / currentNum).toPrecision(2);
+        calculated = true;
+    } else if (/[-]/.test(output.textContent)) {
+        console.info("MINUS");
+        output.textContent = output.textContent + " " + currentNum + " =";
+        input.textContent = (lastNum - currentNum);
         calculated = true;
     }
 
